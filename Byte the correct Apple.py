@@ -9,25 +9,25 @@ import re
 count_vect = CountVectorizer(lowercase=False, ngram_range=(1, 2), min_df=0.3, stop_words='english')
 tfidf_transformer = TfidfTransformer(use_idf=False, smooth_idf=True)
 
-train_data = []  # data store for training data, list of strings
-test_data = []  # data store for test data, list of strings
-train_y = []  # data store for target variables for training, list of A(a)pples
+train_data = []  #list of training data 
+test_data = []  # list of testing data 
+train_y = []  # target variable 
 
 # reading trainig data from text files
 for line in open('apple-computers.txt', encoding="utf8"):
     if len(line.strip()) > 0:  # skip empty lines
         train_data.append(line.strip().strip('. '))
-        train_y.append('computer-company')
+        train_y.append('computer-company') # Target Variable
 for line in open('apple-fruit.txt', encoding="utf8"):
     if len(line.strip()) > 0:  # skip empty lines
         train_data.append(line.strip('. '))
-        train_y.append('fruit')
+        train_y.append('fruit')  # Target Variable
 
 # reading test data from STDIN
 for line in sys.stdin.readlines():
-    line = re.sub('\d', '', line)
+    line = re.sub('\d', '', line) 
     if len(line.strip()) > 0:  # skip empty lines
-        test_data.append(line.strip('. '))
+        test_data.append(line.strip('. ')) 
 
 # training set text processing
 X_train_counts = count_vect.fit_transform(train_data)
